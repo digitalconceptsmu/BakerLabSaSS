@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   app-hub-assistance-ai:
+    container_name: bakerlab_app
     build:
       context: .
       args:
@@ -28,6 +29,7 @@ services:
     restart: unless-stopped
 
   db-hub-assistance-ai:
+    container_name: bakerlab_db
     image: mariadb:10.6
     env_file:
       - .env_db
