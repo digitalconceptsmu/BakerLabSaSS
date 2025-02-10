@@ -43,9 +43,9 @@ services:
 
 volumes:
   mysql_data-hub-assistance-ai:
-    name: igensia_mysql_data-hub-assistance-ai
+    name: bakerlab-ai_mysql_data-hub-assistance-ai
 
 networks:
+  bakerlab-ai-net:
   reverse-proxy-net:
     external: true
-  bakerlab-ai-net:

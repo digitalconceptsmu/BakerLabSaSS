@@ -1,0 +1,20 @@
+# Use Node.js v18 as the base image
+FROM node:18-alpine
+
+# Install necessary build tools and mysql-client
+RUN apk add --no-cache libc6-compat netcat-openbsd mysql-client dos2unix openssl
+
+# Set working directory
+WORKDIR /app
+
+# Copy prisma directory first
+COPY prisma ./prisma/
+
+# Copy package files
+COPY package.json package-lock.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "dev"]

@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  app:
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    image: bakerlab-ai-app
+    depends_on:
+      - "db"
+    networks:
+      - bakerlabai-net
+
+  db:
+    image: mariadb:10.6
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    env_file:
+      - .env_db
+    networks:
+      - bakerlabai-net
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+
+volumes:
+  mysql_data:
+    name: bakerlab_ai_mysql_data
+
+networks:
+  bakerlabai-net:
