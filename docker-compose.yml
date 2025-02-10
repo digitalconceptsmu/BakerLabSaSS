@@ -49,5 +49,6 @@ volumes:
 
 networks:
   bakerlab-ai-net:
+    name: bakerlab-net
   reverse-proxy-net:
     external: true
